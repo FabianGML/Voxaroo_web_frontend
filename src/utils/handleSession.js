@@ -1,7 +1,16 @@
 import axios from 'axios'
+/**
+ * Function to handle the session login and signup requests to the server
+ * it also sets the response state wheter the request was successful or not
+ * @param {function} setResponse - Function to set the response state
+ * @param {function} setIsLoading - Function to set the isLoading state
+ * @param {function} navigate - Function to navigate to another route
+ * @param {object} e - The event object
+ * @param {string} path - The path to make the request
+ * @returns {void}
+ */
 export default function handleSession (setResponse, setIsLoading, navigate, e, path) {
   e.preventDefault()
-  console.log(e)
   // Recovering the user input data
   const formData = new FormData(e.target)
   const data = Object.fromEntries(formData)
@@ -10,8 +19,8 @@ export default function handleSession (setResponse, setIsLoading, navigate, e, p
   // Making the post request to the server
   axios.post(path, data)
     .then((response) => {
-      window.localStorage.setItem('token', response.data.token)
       window.localStorage.setItem('id', response.data.id)
+      window.localStorage.setItem('token', response.data.token)
       setIsLoading(false)
       navigate('/')
     })

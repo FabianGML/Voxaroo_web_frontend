@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import Header from '../components/Header/Header'
 import { AppContext } from '../AppContext'
 import HeroButton from '../components/HomeComponents/HeroButton'
@@ -6,20 +6,24 @@ import defaultImg from '../assets/user-images/default.jpg'
 import { useActiveSession } from '../hooks/useActiveSession'
 import Product from '../components/Product'
 import Category from '../components/Category'
+import Main from '../components/Main'
 export default function Home () {
-  const { isSessionActive } = useContext(AppContext)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { isMenuOpen, isSessionActive, closeMenu } = useContext(AppContext)
   useActiveSession({ route: '/' })
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
   return (
     <>
-      <Header closeMenu={closeMenu} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <main onClick={closeMenu} className='mt-14'>
-        <section
-          className={`${isMenuOpen ? 'bg-black opacity-75' : 'bg-slate-100'} h-1/2`}
-        >
+      {isMenuOpen && <div
+        className={`
+        fixed w-full h-full top-0 left-0
+      bg-black bg-opacity-50
+        transition-transform duration-300 ease-out transform z-10
+        ${isMenuOpen ? '' : 'hidden'}
+      `}
+        onClick={closeMenu}
+                     />}
+      <Header />
+      <Main>
+        <section>
           <div className='flex flex-col gap-12 items-center h-1/2 bg-green-300 px-10 py-5'>
             <p className='mb-6 text-2xl font-extrabold'>
               Conecta con gente de tu localidad para vender y comprar artículos
@@ -49,8 +53,7 @@ export default function Home () {
             <Category img={defaultImg} name='Cocina' />
           </div>
         </section>
-
-      </main>
+      </Main>
     </>
   )
 }

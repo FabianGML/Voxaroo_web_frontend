@@ -6,6 +6,10 @@ export default function AppProvider ({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSessionActive, setIsSessionActive] = useState(false)
 
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
+
   const URL = 'http://localhost:3000'
 
   return (
@@ -14,6 +18,7 @@ export default function AppProvider ({ children }) {
       setIsMenuOpen,
       isSessionActive,
       setIsSessionActive,
+      closeMenu,
       URL
     }}
     >
