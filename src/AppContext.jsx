@@ -4,10 +4,17 @@ export const AppContext = createContext()
 
 export default function AppProvider ({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
   const [isSessionActive, setIsSessionActive] = useState(false)
+  const [profileData, setProfileData] = useState({})
 
-  const closeMenu = () => {
+  const closeMenuAndProfile = () => {
     setIsMenuOpen(false)
+    setIsProfileMenuOpen(false)
+  }
+
+  const toggleProfileMenu = () => {
+    setIsProfileMenuOpen(value => !value)
   }
 
   const URL = 'http://localhost:3000'
@@ -16,9 +23,14 @@ export default function AppProvider ({ children }) {
     <AppContext.Provider value={{
       isMenuOpen,
       setIsMenuOpen,
+      isProfileMenuOpen,
+      setIsProfileMenuOpen,
       isSessionActive,
       setIsSessionActive,
-      closeMenu,
+      profileData,
+      setProfileData,
+      closeMenuAndProfile,
+      toggleProfileMenu,
       URL
     }}
     >

@@ -10,7 +10,7 @@ export default function Message ({ text, error }) {
       {Array.isArray(text) && (
         <ul className={`w-full h-auto rounded-md text-white flex flex-col gap-3 justify-center items-center p-3 ${classes}`}>
           {text.map((item, index) => (
-            <li key={index}>•{item}</li>
+            <li key={index}>•  {item}</li>
           ))}
         </ul>
       )}

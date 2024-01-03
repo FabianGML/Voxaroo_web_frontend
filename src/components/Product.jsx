@@ -1,12 +1,41 @@
-export default function Product ({ image, name, price, seller }) {
+import { useContext, useEffect, useState } from 'react'
+import { AppContext } from '../AppContext'
+import blackHeart from '../assets/black-heart.png'
+import fullHeart from '../assets/full-heart.png'
+import axios from 'axios'
+
+export default function Product ({ id, image, name, location, price }) {
+  const { isActiveSession, URL } = useContext(AppContext)
+  const [isFavorite, setIsFavorite] = useState(false)
+
+  /**
+   * This useEffect will be executed every time the user clicks on the heart icon
+   * and will add or remove the product from the user's favorites.
+   */
+  useEffect(() => {
+    if (!isActiveSession) return
+    const userId = window.localStorage.getItem('id')
+    axios.post(`${URL}/products/add-favorite`,
+      { userId, productId: id }
+    )
+  })
+
+  const formatName = name.length > 40 ? name.slice(0, 40).trim() + '...' : name
   return (
-    <div className='w-full h-56 flex border-2 border-gray-400 my-5'>
-      <img src={image} alt={name} className='w-1/2 object-cover border-r-2 border-gray-300' />
-      <div className='w-1/2 flex flex-col gap-1 p-2'>
-        <span className='font-bold text-lg'>{name}</span>
-        <span className='text-sm'>$<span className='font-extrabold text-3xl font-mono'>{price}</span></span>
-        <span>{seller}</span>
-        <button className='py-3 mx-3 rounded-lg border border-gray-400'>Agregar al Carrito</button>
+    <div className='h-72 relative flex flex-col border-2 border-gray-400 rounded-sm overflow-hidden'>
+      {!isFavorite && <img src={blackHeart} onClick={() => setIsFavorite(value => !value)} className='absolute w-6 right-2 top-2 cursor-pointer' />}
+      {isFavorite && <img src={fullHeart} onClick={() => setIsFavorite(value => !value)} className='absolute w-6 right-2 top-2 cursor-pointer' />}
+      <div className='overflow-hidden'>
+        <img
+          src={image}
+          alt={name}
+          className='object-cover border-r-2 border-gray-300 transition-transform transform hover:scale-125'
+        />
+      </div>
+      <div className='w-full flex flex-col gap-1 px-3 py-1 dark:text-white'>
+        <span className=''>{location}</span>
+        <span className='font-bold text-md'>{formatName}</span>
+        <span className='text-sm'>$<span className='font-extrabold text-2xl font-mono'>{price}</span></span>
       </div>
     </div>
   )
