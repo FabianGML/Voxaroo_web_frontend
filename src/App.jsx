@@ -6,6 +6,7 @@ import AppProvider from './AppContext.jsx'
 import Profile from './pages/Profile.jsx'
 import { useEffect } from 'react'
 import NotFound from './pages/NotFound.jsx'
+import UserProducts from './pages/UserProducts.jsx'
 
 export default function App () {
   const routes = createBrowserRouter([
@@ -24,6 +25,10 @@ export default function App () {
     {
       path: '/profile',
       element: <Profile />
+    },
+    {
+      path: '/my-products',
+      element: <UserProducts />
     },
     {
       path: '*',

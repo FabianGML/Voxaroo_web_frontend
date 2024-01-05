@@ -87,7 +87,7 @@ export default function Header () {
               <HeaderProfileLink link='/profile' text='Perfil' hoverbg='bg-gray-500' />
               <HeaderProfileLink link='/compras' text='Compras' />
               <HeaderProfileLink link='/sales' text='Ventas' />
-              <HeaderProfileLink link='/sales' text='Gestionar Productos' />
+              <HeaderProfileLink link='/my-products' text='Gestionar Productos' />
               {(profileData.isAdmin || profileData.isSuperAdmin) && (
                 <HeaderProfileLink link='/categories' text='Admin. Categorias' />
               )}
