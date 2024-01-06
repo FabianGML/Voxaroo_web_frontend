@@ -5,3 +5,7 @@ export function formatName (name) {
 export function formatEmail (email) {
   return email[0] + '***' + email.slice(email.indexOf('@') - 2)
 }
+
+export function formatTitle (title, length = 40) {
+  return title.length > length ? title.slice(0, length).trim() + '...' : title
+}

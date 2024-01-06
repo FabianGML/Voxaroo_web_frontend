@@ -3,6 +3,7 @@ import { AppContext } from '../AppContext'
 import blackHeart from '../assets/black-heart.png'
 import fullHeart from '../assets/full-heart.png'
 import axios from 'axios'
+import { formatTitle } from '../utils/formatName'
 
 export default function Product ({ id, image, name, location, price }) {
   const { isActiveSession, URL } = useContext(AppContext)
@@ -19,8 +20,8 @@ export default function Product ({ id, image, name, location, price }) {
       { userId, productId: id }
     )
   })
+  const title = formatTitle(name)
 
-  const formatName = name.length > 40 ? name.slice(0, 40).trim() + '...' : name
   return (
     <div className='h-72 relative flex flex-col border-2 border-gray-400 rounded-sm overflow-hidden'>
       {!isFavorite && <img src={blackHeart} onClick={() => setIsFavorite(value => !value)} className='absolute w-6 right-2 top-2 cursor-pointer' />}
@@ -34,7 +35,7 @@ export default function Product ({ id, image, name, location, price }) {
       </div>
       <div className='w-full flex flex-col gap-1 px-3 py-1 dark:text-white'>
         <span className=''>{location}</span>
-        <span className='font-bold text-md'>{formatName}</span>
+        <span className='font-bold text-md'>{title}</span>
         <span className='text-sm'>$<span className='font-extrabold text-2xl font-mono'>{price}</span></span>
       </div>
     </div>
