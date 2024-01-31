@@ -12,7 +12,7 @@ export default function UserProducts () {
           <h3 className='dark:text-white py-4 text-lg'>Buscar por Categorias</h3>
         </section>
         <section>
-          <ProductCard title='Laptop intel core i5-12450H 8GB RAM 256GB SSD ' price='16000' stock='1' image={defaultImage} id='1234123' />
+          <ProductCard title='Laptop intel core i5-12450H 8GB RAM 256GB SSD ' price='16,000' stock='1' image={defaultImage} id='1234123' />
         </section>
         <Link
           className='bg-green-300 dark:bg-green-800 absolute

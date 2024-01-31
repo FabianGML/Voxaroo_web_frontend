@@ -9,3 +9,7 @@ export function formatEmail (email) {
 export function formatTitle (title, length = 40) {
   return title.length > length ? title.slice(0, length).trim() + '...' : title
 }
+
+export function formatPrice (price) {
+  //
+}

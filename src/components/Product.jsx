@@ -3,7 +3,7 @@ import { AppContext } from '../AppContext'
 import blackHeart from '../assets/black-heart.png'
 import fullHeart from '../assets/full-heart.png'
 import axios from 'axios'
-import { formatTitle } from '../utils/formatName'
+import { formatTitle } from '../utils/formatHandler'
 
 export default function Product ({ id, image, name, location, price }) {
   const { isActiveSession, URL } = useContext(AppContext)
